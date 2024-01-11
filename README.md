@@ -1,2 +1,2 @@
 # dark-mode-context
-A App to implement dark mode using React Context by Arjun Khati Patel
+An App to implement dark mode using React Context by Arjun Khati Patel
