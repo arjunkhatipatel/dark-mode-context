@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./Component/Navbar";
+import About from "./Component/About";
+import Contact from "./Component/Contact";
+import Home from "./Component/Home";
+import { useContext, useEffect } from "react";
+import ThemeContext from "./Context/ThemeContext";
 
 function App() {
+  const { darkMode } = useContext(ThemeContext);
+
+  useEffect(() => {
+    document.body.style.backgroundColor =
+      darkMode === "dark" ? "#36454F" : "white";
+    console.log(darkMode);
+  }, [darkMode]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <div
+        className="container my-4"
+        data-bs-theme={darkMode === "dark" ? "dark" : ""}
+        style={{ backgroundColor: darkMode === "dark" ? "dark" : "" }}
+      >
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/about" element={<About />} />
+          <Route exact path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
